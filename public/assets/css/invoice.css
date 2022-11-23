@@ -1,0 +1,90 @@
+
+
+.invoice-style .table-bordered td,
+.invoice-style .table-bordered th {
+    border: 1px solid #ddd;
+    padding: 10px;
+    word-break: break-all;
+}
+
+/*body {*/
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*font-size: 16px;*/
+/*}*/
+.invoice-style .h4-14 h4 {
+    font-size: 12px;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.invoice-style .img {
+    margin-left: "auto";
+    margin-top: "auto";
+    height: 30px;
+}
+.invoice-style pre,
+p {
+    /* width: 99%; */
+    /* overflow: auto; */
+    /* bpicklist: 1px solid #aaa; */
+    padding: 0;
+    margin: 0;
+}
+.invoice-style table {
+    font-family: arial, sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+    padding: 1px;
+}
+.invoice-style .hm-p p {
+    text-align: left;
+    padding: 1px;
+    padding: 5px 4px;
+}
+.invoice-style td,
+th {
+    text-align: left;
+    padding: 8px 6px;
+}
+.invoice-style .table-b td,
+.table-b th {
+    border: 1px solid #ddd;
+}
+.invoice-style th {
+    /* background-color: #ddd; */
+}
+.invoice-style .hm-p td,
+.hm-p th {
+    padding: 3px 0px;
+}
+.invoice-style .cropped {
+    float: right;
+    margin-bottom: 20px;
+    height: 100px; /* height of container */
+    overflow: hidden;
+}
+.invoice-style .cropped img {
+    width: 400px;
+    margin: 8px 0px 0px 80px;
+}
+.invoice-style .main-pd-wrapper {
+    box-shadow: 0 0 10px #ddd;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+}
+.invoice-style .table-bordered td,
+.table-bordered th {
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 14px;
+}
+.invoice-style .invoice-items {
+    font-size: 14px;
+    border-top: 1px dashed #ddd;
+}
+.invoice-style .invoice-items td{
+    padding: 14px 0;
+
+}

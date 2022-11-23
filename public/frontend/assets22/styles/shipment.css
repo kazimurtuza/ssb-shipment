@@ -1,0 +1,650 @@
+
+#table_id tbody tr:last-child .dropdown-menu{
+
+    top: -240px;
+}
+#table_id tbody tr:nth-last-child(2) .dropdown-menu{
+
+    top: -240px;
+}
+
+#table_id tbody tr:first-child .dropdown-menu{
+
+    top: -60px !important;
+}
+
+.invfooterleft{
+    margin-left: 118px !important;
+}
+.cancelbg{
+    font-size: 10px;
+    line-height: 57px;
+    width: 118px;
+    color: red;
+    border-radius: 10px;
+    padding: 6px;
+    background: rgb(246 203 203 / 65%);
+}
+.cancelsm{
+    font-size: 7px;line-height: 10px;width: 118px;color: red;border-radius: 10px;padding: 7px; background: rgb(246 203 203 / 65%);
+}
+.paidbtn{
+    width: 58px;
+    color: #0E6245;
+    background: #CBF4C9;
+    border-radius: 11px !important;
+}
+.tonubtn{
+    padding-top: 10px !important;
+    color: #828282;
+    background: #A0A0A0;
+    border-radius: 11px !important;
+    color: #5f5c5c;
+    background: #E0E0E0;
+    border-radius: 11px !important;
+}
+
+.new_customer_btn{
+    font-size: 12px;
+    color:blue;
+}
+.mul>.select2-container--default .select2-selection--multiple {
+    border: 1px solid #ddd !important;
+    width:190px;
+    border-radius: 22px;
+    font-size: 16px;
+    padding: 5px 4px 2px 5px;
+    border: none;
+    box-shadow: none;
+}
+.mul>.select2-container--default.select2-container--focus .select2-selection--multiple {
+
+    padding: 5px 4px 2px 5px;
+    border-radius: 10px;
+
+}
+.mul>.select2-container {
+    display: inline;
+}
+
+
+.margin-bottom-20>.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #212121 !important;
+    border-radius: 11px 0px 0px 11px !important;
+    width: 204.3px;
+
+}
+.margin-bottom-20>.select2-container--open .select2-dropdown--below {
+    width: 119px !important;
+}
+
+{
+    background-color: #fff;
+    border: 1px solid #212121 !important;
+    border-radius: 11px 0px 0px 11px !important;
+    width: 204.3px;
+
+}
+.input-group-btn>.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #212121 !important;
+    border-radius: 0px 11px 11px 0px !important;
+    width: 120px !important;
+
+}
+.download{
+    cursor: pointer;
+}
+.overviewbox3{
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+    box-shadow: 0px 5px 6px rgb(255 249 200 / 25%);
+    border-radius: 22px;
+    margin: 20px;
+}
+#truck{
+    color: #000000 !important;
+    font-size: 17px !important;
+}
+.btmtb{
+    /*border-bottom: 1px solid #cccccc;*/
+}
+.btmtb2{
+    border-bottom: 1px dotted #cccccc;
+}
+.viewtable>tbody>tr>td{
+    padding:3px !important;
+    margin:3px !important;
+}
+.viewtable{
+    margin-bottom: 16px !important;
+}
+.distance{
+    top: -2px;
+    position: relative;
+    margin-left: 6.6px;
+    font-size: 12px;
+    font-weight: 900;
+}
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    width: 100% !important;
+    border: 1px solid #aaa;
+}
+/*/ width /*/
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0099e5;
+}
+
+.location td{
+
+    padding: 0px 2px !important;
+}
+
+
+
+.wizard > .steps > ul > li:first-child.current a span.round_text_center {
+    position: relative;
+    top: -3px;
+}
+
+.wizard > .steps > ul > li:nth-child(2).current a span.round_text_center {
+    position: relative;
+    top: -3px;
+    left: -1px;
+}
+
+.wizard > .steps > ul > li:nth-child(3).current a span.round_text_center {
+    position: relative;
+    top: -3px;
+    left: -2px;
+}
+
+.wizard > .steps > ul > li:last-child.current a span.round_text_center {
+    position: relative;
+    top: -3px;
+    left: -3px;
+}
+
+.wizard > .content > .body {
+    float: left;
+    position: relative;
+    width: 95%;
+    height: 95%;
+    padding: 2.5%;
+}
+
+.pac-container {
+    z-index: 9999;
+}
+
+.src .fa{
+    color:white !important;
+}
+.mrsrcb{
+
+    margin-right: 28px;
+
+}  .mrsrcc{
+
+       margin-right: 57px;
+
+   }
+
+
+.srcbtn{
+    background-color: rgba(227, 17, 17, 0);
+    border:none !important;
+
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.bor{
+    border-bottom: 1px solid #ede8e8;
+    margin-top: 11px;
+    margin-bottom: 8px;
+}
+
+.itemtb td{
+    border-radius: 1px solid black !important;
+}
+
+.invlist th{
+    text-align: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.clsbtnst{
+    font-size: 27px !important;
+    font-weight: 100 !important;
+    color: #0a0909 !important;
+    position: relative;
+    top: 8px;
+}
+
+.labposi{
+    left: -76px;
+    top: 18px;
+}
+
+
+
+
+/*search btn*/
+/* Dropdown Button */
+.dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+/* The search field */
+#myInput {
+    width: 100%;
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 12px;
+
+}
+/*multi src*/
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: 1px solid #fff;
+    width: 195px;
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 4px 4px 2px 40px;
+    border: none;
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 12px;
+
+}
+
+.select2-container--default .select2-selection--multiple {
+    border: 1px solid #fff;
+
+    width: 195px;
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 4px 4px 2px 40px;
+    border: none;
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 12px;
+}
+
+/*multi src*/
+/* The search field when it gets focus/clicked on */
+#myInput:focus {outline: 3px solid #ddd;}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+.opmenu{
+    font-size: 10pc;
+    position: absolute;
+    top: 40px;
+    right: -143px;
+    line-height: 19px;
+}
+.opmenu:hover{
+    cursor: pointer;
+}
+
+.statusbtn{
+    margin-left: -4px !important;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px !important;
+    line-height: 26px !important;
+    padding: 5px 10px 10px 8px !important;
+    width: 66px;
+}
+#opposition {
+    font-size: 15px;
+    position: absolute;
+    right: 105px;
+    top: -73px;
+}
+
+
+.dropdown-menuedit{
+
+    padding: 10px;
+    left: -224px !important;
+    border-radius: 10px;
+    border: none !important;
+
+}
+
+#ifontsiz{
+    font-size: 20px !important;
+}
+
+#ifontsiz2{
+    position: absolute;
+    right: -19px;
+    top: 10px;
+    font-size: 15px !important;
+}
+
+.optionitem tr:hover{
+    cursor: pointer;
+}
+
+
+.form-check-label{
+    font-family: Lato !important;
+    font-style: normal !important;
+}
+.invmodal{
+    padding:20px;
+    border-radius: 21px;
+
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+
+}
+
+.itemtb>thead>tr>th {
+    vertical-align: bottom !important;
+    border-bottom: 1px solid #e4e1e1 !important;
+    border-right:1px solid #e4e1e1 !important;
+}
+.itemtb>tr>th {
+    vertical-align: bottom !important;
+    border-bottom: 1px solid #e4e1e1 !important;
+}
+
+.itemtb>tbody>tr>td{
+    border-right: 1px solid #e4e1e1 !important;
+
+}.itemtb>tfoot>tr>td{
+     border-right: 1px solid #e4e1e1 !important;
+
+ }
+
+.btnstyle{
+    border: 1px solid #dddddd;
+    padding: 15px;
+    border-radius: 31px;
+    height: 38px;
+}
+
+.itemtx{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    color:#44A4FD;
+
+}
+.checkboxtx{
+    margin-left: 70px;font-family: 'Public Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 21px;
+    top: 1px;
+    position: relative;
+    margin-top: 10px;
+    left: -13px;
+}
+.checktx{
+    color: black !important;
+    font-weight: 700 !important;
+}
+
+.overviewbox {
+    width:none !important;
+}
+.adddetails{
+    margin-top: 5px;
+    border-top: 1px solid #dbdbdb;
+    padding-top: 7px;
+    padding-bottom: 9px;
+}
+
+
+
+.customer>.select2-container--default >.select2-selection--single{
+    border-radius: 50% !important;
+}
+
+.customer>.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #212121;
+    border-radius: 10px 1px 1px 10px;
+}
+.contact>.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #212121;
+    border-radius: 1px 10px 10px 1px;
+}
+.contact{
+    margin-top: 4px;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.customer{
+    margin-right: 0px;
+    padding-right: 0px;
+}
+
+
+
+.filterhead{
+    padding-top: 0px;
+    margin-top: -30px !important;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 26px;
+    align-items: center;
+    color: #3C4257;
+    margin-bottom: 14px;
+}
+
+.invdate{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 21px;
+    text-align: center;
+    letter-spacing: 0.2px;
+    color: #000000;
+}
+.invoicesubbtn{
+    border-radius: 7px;
+    height: 33px;
+    color: white !important;
+    font-size: 15px;
+    background: none;
+    padding: 3px 27px;
+    background: #2F80ED;
+    padding: 5px 19px 5px 19px !important;
+}
+.invsavebtn{
+    border: 2px solid #2F80ED;
+    color: #00aeff;
+    height: 33px;
+    font-size: 13px;
+    background: none;
+    padding: 3px 10px;
+    border-radius: 8px;
+    padding: 3px 20px !important;
+}
+
+.doclistbtn{
+    height: 33px;
+    font-size: 12px;
+    background: none;
+    box-shadow: rgb(0 0 0 / 48%) 0px 1px 4px !important;
+    padding: 5px 17px;
+}
+.shipmentidtx{
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 3px;
+    color: #818181;
+    margin-left: 12px;
+}
+
+.dvbtn>.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #020202;
+    border-radius: 10px;
+}
+
+.select2-container--default .select2-search--inline .select2-search__field {
+    font-size: 13px;
+    padding-top: 5px;
+}
+.tableinputstyle{
+    text-align: center;
+    width: 100% !important;
+    border: none;
+}
+/*.select2-search__field{*/
+/*    width: 130px !important;*/
+/*}*/
+
+.fa {
+    font-size: 11px;
+}
+
+.wizard > .actions a, .wizard > .actions a:hover, .wizard > .actions a:active {
+    background: rgb(43 75 242) !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    font-size: 10px !important;
+}
+.upfiletxt{
+    background: rgba(201, 201, 201, 0.15);
+    border-radius: 11px;
+    justify-content: center;
+    align-items: center;
+    padding: 3px 6px 3px 11px;
+    position: relative;
+    overflow: hidden;
+}
+.filedel{
+    position: absolute;
+    top: 6px;
+    right: 7px;
+    cursor: pointer;
+}
+.filedel2{
+    position: absolute;
+    top: 5px;
+    right: 3px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.ftrtx{
+
+    font-size: 12px;
+    align-items: center;
+    color: #2B4BF2;
+    /* margin-bottom: 1px; */
+    text-align: right;
+    cursor: pointer;
+}
+
+.srclist.select2-container {
+    width: 200px !important
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    margin-top: 4px;
+}
+
+
+/*customer add style*/
+
+.labposi{
+    left: -76px;
+    top: 18px;
+}
+.agetnumber{
+    position: absolute;
+    background: blue;
+    padding: 4px;
+    font-size: 10px;
+    width: 20px;
+    height: 19px;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    top: 14px;
+    left: 96px;
+    line-height: 11px;
+}
+/*.agetnumberedit{*/
+/*position: absolute;*/
+/*background: blue;*/
+/*padding: 4px;*/
+/*font-size: 10px;*/
+/*width: 20px;*/
+/*height: 19px;*/
+/*border-radius: 50%;*/
+/*color: white;*/
+/*text-align: center;*/
+/*top: 14px;*/
+/*left: 96px;*/
+/*line-height: 11px;*/
+/*}*/
+.margintopsm{
+    margin-top: -15px !important;
+}
+
+#contactnamelist{
+    border-radius: 10px;
+}
+.lhide{
+    line-height: 15px;
+
+}
+
+
+

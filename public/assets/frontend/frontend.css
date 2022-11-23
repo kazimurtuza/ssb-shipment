@@ -1,0 +1,125 @@
+body{
+
+    font-family: 'Poppins', sans-serif;
+}
+.nav{
+    padding: 10px 51px;
+}
+.navbtn1{
+    width: 100px;
+    margin-right: 10px;
+    height: 30px;
+    border: none;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 3px rgb(0 0 0 / 25%);
+    border-radius: 28px;
+    color: #FF6C1A;
+    font-weight: 600;
+}
+.navbtn2{
+    width: 100px;
+    height: 30px;
+    border: none;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 3px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    color: black;
+    font-weight: 600;
+}
+.nal-ul{
+list-style: none;
+}
+.txt-st{
+    ont-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 120px;
+
+    letter-spacing: 0.21em;
+
+    color: #807C7C;
+}
+.text-content-st{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 79px;
+    color: #000000;
+}
+
+.src-card{
+    position: relative;
+    background: #FFFFFF;
+    box-shadow: 0px 10px 50px rgba(255, 175, 131, 0.15);
+    border-radius: 63px;
+    margin-top: 138px;
+    padding: 47px 7px 28px 12px;
+}
+.src-input-div{
+    background: #FFFFFF;
+    border: 2px solid #EBEBEB;
+    border-radius: 34px;
+    padding: 10px;
+    align-items: center;
+}
+.tract-btn{
+    border: none;
+    margin-left: 15px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    padding: 10px;
+    border-radius: 16px;
+    background: #48BCFC;
+    color:white;
+}
+
+.src-input-style{
+
+    border: none;
+}
+
+.card-top-btn-div{
+    position: absolute;
+    top: -37px;
+    padding: 7px 31px;
+    background: #FFFFFF;
+    box-shadow: 1px 1px 12px rgb(0 0 0 / 8%);
+    border-radius: 23px;
+}
+.top-active-btn{
+    background: #FFFFFF;
+    box-shadow: 1px 1px 3px rgb(0 0 0 / 26%);
+    border-radius: 35px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btn-end-site{
+    display: flex;
+    justify-content: right;
+}
+
+.top-active-btn:hover{
+    background: #0b5ed7;
+    color:white;
+
+}
+.service-btn{
+    width: 130px;
+    height: 40px;
+    left: 300px;
+    top: 639px;
+    border: none;
+    color: white;
+
+    background: linear-gradient(270deg, #FF6C1A 0%, rgba(236, 167, 32, 0.61) 100%);
+    border-radius: 50px;
+}
+
+.mairow {
+    box-shadow: none !important;
+}

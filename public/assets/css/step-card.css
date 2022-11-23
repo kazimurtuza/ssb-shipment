@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400&display=swap');
+
+body{
+    font-family: 'Poppins', sans-serif ;
+}
+.register{
+    width: 800px;
+}
+.modalstyle {
+
+    border-radius: 48px;
+}
+
+.imgrow {
+    background: #166275;
+    border-radius: 30px 0px 0px 30px;
+    height: 500px;
+    justify-content: center;
+}
+
+.imgstyle {
+    margin-top: -18%;
+    margin-left: -22px;
+}
+
+.loginrg {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.0015em;
+    color: #000000;
+    opacity: 0.3;
+}
+
+.inputstyle {
+
+    height: 26px;
+    margin-top: 24px;
+    border-radius: 8px;
+    border-color: #32323247;
+}
+
+
+.sing {
+    width: 65px;
+    height: 24px;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    letter-spacing: 0.0015em;
+
+    color: #000000;
+}
+
+.btnnext {
+    margin-top: 28px;
+    background: #2F80ED;
+    box-shadow: 0px 10px 24px rgba(54, 123, 245, 0.25);
+    border-radius: 99px;
+    padding-left: 23px;
+}
+
+.btnnext2 {
+    margin-right: 12px;
+    margin-top: 28px;
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 700;
+    border-radius: 99px;
+
+    color: #6A6A6A;;
+}
+
+.imgback {
+    margin-bottom: 3px;
+}
+
+.imgiconnext {
+    height: 13px;
+}
+.error_span{
+    font-size: 11px;
+    font-weight: 500;
+    display: none;
+}
+.googletxt:hover{
+    color: rgba(0, 187, 255, 0.31);
+}
+
+.step {
+    margin-right: 19px;
+}
+.inputstyle {
+    height: 35px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border-color: #32323247;
+}
+.package_info{
+
+    justify-content: center;
+
+}
+
+.package_info{
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 12px;
+    padding: 23px;
+    background: #fefefe;
+    border-radius: 15px;
+    width: 88%;
+}
+
+.package_info ol li {
+    list-style-type: circle;
+}
+.topdiv{
+    background: #ededed94;
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+/**/
+.mairow{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background: white;
+    border-radius: 20px;
+}
+
+.listwidth{
+    width: 187px;
+}
+.standeroption{
+    width: 77px;
+}
+.custominput{
+    width: 32px;
+}
+
+.tvinput .input-group {
+    width: 100px
+}
+.tvinput .basic-addon2 {
+    width: 30%;
+}
+
+.deleteitem{
+    cursor: pointer;
+}
+
+.inv{
+
+    /*background: #efefef;*/
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+}
+
+.footerborder{
+    border-top: 1.4px solid #e0e0e0 !important;
+}
+
+
+
+
+/*stripe*/
+.panel-title {
+    display: inline;
+    font-weight: bold;
+}
+.display-table {
+    display: table;
+}
+.display-tr {
+    display: table-row;
+}
+.display-td {
+    display: table-cell;
+    vertical-align: middle;
+    width: 61%;
+}
+.text-style{
+
+}
+
+.card-border-style{
+    border: 2px solid #e9e6e6;
+    border-radius: 15px;
+    padding: 19px;
+}
+
+
+
+/*stripe*/
+
+
+
+
+
+
+
+
+
+/**/
