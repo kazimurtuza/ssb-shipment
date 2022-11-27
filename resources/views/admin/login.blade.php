@@ -145,6 +145,11 @@
                         <div class="col-md-12">
                             <h4 class="text-center text-dark mt-2 logotx">Login</h4>
                             <h5 class="text-center text-dark mt-2 logosubtx">Please enter your email and password</h5>
+                            @if(session()->has('error'))
+                                <div class="alert alert-success">
+                                    <h5 class="text-center text-dark mt-2 logosubtx text-danger"> {{ session()->get('error') }}</h5>
+                                </div>
+                            @endif
 
                             {{--<div class="text-center mb-5 text-dark">Made with bootstrap</div>--}}
                             <div class="p-1">

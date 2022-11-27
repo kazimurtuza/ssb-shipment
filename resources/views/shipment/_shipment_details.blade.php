@@ -15,6 +15,10 @@
                 <h1 class="modal-title text-center" id="myModalLabel" style="font-size: 22px;font-weight: 700; margin-bottom: 10px">
                     Shipment Details
                 </h1>
+                <h3 class="text-center" style="font-size: 15px;font-weight: 700; margin-bottom: 10px">{{$shipment->is_drop_off==1?'Drop off':'Pickup'}} Shipment</h3>
+                @if($shipment->is_drop_off==1)
+                    <h3 class="text-center" style="font-size: 15px;font-weight: 700; margin-bottom: 10px">Drop off Location:{{$shipment->drop_off_address}} </h3>
+                @endif
                 <h3 class="text-center" style="font-size: 15px;font-weight: 700; margin-bottom: 10px">ID: &nbsp;#{{$shipment->shipment_no}}</h3>
             </div>
 

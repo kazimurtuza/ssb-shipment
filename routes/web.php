@@ -53,8 +53,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('admin/shipment/drop', 'ShipmentController@shipmentDropStore')->name('admin.shipment.shipping.store');
         Route::get('admin/shipment/payment', 'ShipmentController@payment_info')->name('admin.shipment.payment');
         Route::get('admin/loginout', 'adminAuthController@logout')->name('admin.loginout');
-        Route::get('shipment/product/print', 'ShipmentController@productPrint')->name('shipment.product.print');
     });
+
+    Route::get('shipment/product/print', 'ShipmentController@productPrint')->name('shipment.product.print');
 
 
 

@@ -532,7 +532,7 @@
     <!-- Modal calculation-->
     <div class="modal fade" id="shipmetCalculate" data-backdrop="static" data-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg customise">
             <div class="modal-content rate-calculation-modal">
 
                 <div class="modal-body">
@@ -568,7 +568,7 @@
                                                             <div class="col-sm-11  mt-2">
                                                                 <textarea name="" class="form-control" id="" cols="10"
                                                                           rows="1" placeholder="Enter Pickup Address" ></textarea>
-                                                                <span class="text-danger error_span" id="sender_name">This Field is Required</span>
+                                                                {{--<span class="text-danger error_span" id="sender_name">This Field is Required</span>--}}
                                                             </div>
 
                                                         </div>
@@ -583,7 +583,7 @@
                                                                 <div class="col-sm-12  mt-2">
                                                                 <textarea name="" class="form-control" id="" cols="20"
                                                                           rows="1" placeholder="Enter Delivery Address"></textarea>
-                                                                    <span class="text-danger error_span" id="sender_name">This Field is Required</span>
+                                                                    {{--<span class="text-danger error_span" id="sender_name">This Field is Required</span>--}}
                                                                 </div>
 
 
@@ -630,12 +630,12 @@
 
                                                             <table class="table table-borderless">
                                                                 <thead>
-                                                                <th class="listwidth">List</th>
-                                                                <th>Size</th>
-                                                                <th>Quantity</th>
-                                                                <th>Weight</th>
-                                                                <th>Price</th>
-                                                                <th>Action</th>
+                                                                <th class="listwidth list_a">List</th>
+                                                                <th class="list_b">Size</th>
+                                                                <th class="list_c">Quantity</th>
+                                                                <th class="list_d">Weight</th>
+                                                                {{--<th>Price</th>--}}
+                                                                <th class="list_e">Action</th>
                                                                 </thead>
                                                                 <tbody id="item">
                                                                 </tbody>
@@ -645,7 +645,7 @@
                                                     </div>
                                                 </div>
 
-                                                <br><br><br><br>
+                                                <br><br>
                                                 <div class="col-sm-12 text-center submitbtn mt-5">
 
                             <span class="btn  topbtn-style2" onclick="stepShow('step1')"><img
@@ -704,14 +704,14 @@
                                                 <div class="text-center frtop" style="margin-top: 32px"><span>Step 4-</span> &nbsp;
                                                     <span class="sing2">Invoice</span></div>
                                                 <div class="row mt-4 justify-content-center">
-                                                    <div class="col-sm-8 inv">
+                                                    <div class="col-sm-9 inv">
                                                         <table class="table table-borderless">
                                                             <thead>
                                                             <th class="listwidth">List</th>
                                                             <th>Quantity</th>
                                                             <th>Rate</th>
                                                             </thead>
-                                                            <tbody id="invoice"></tbody>
+                                                            <tbody class="invoice" id="invoice"></tbody>
 
                                                             <tfoot class="footerborder footer">
                                                             </tfoot>
@@ -722,15 +722,6 @@
 
                                                 <br>
                                                 <div class="col-sm-12 text-center submitbtn mt-5">
-                                                    {{--<span class="btn  topbtn-style2" onclick="stepShow('step3')"><img--}}
-                                                    {{--class="imgiconnext imgback"--}}
-                                                    {{--src="{{asset('assets/frontend/images/arrowback.png')}}" alt=""> &nbsp; Back</span>--}}
-
-                                                    {{--<span class="btn btn-info topbtn-style" onclick="stepShow('step5')"> Next &nbsp; <img--}}
-                                                    {{--class="imgiconnext" src="{{asset('assets/frontend/images/arrow.png')}}"--}}
-                                                    {{--alt=""></span>--}}
-
-
                                                     <span class="btn  topbtn-style2" onclick="stepShow('step2')"><img
                                                                 class="imgiconnext imgback"
                                                                 src="{{asset('assets/frontend/images/arrowback.png')}}" alt=""> &nbsp; Back</span>
@@ -738,9 +729,6 @@
                                                                 class="imgiconnext" src="{{asset('assets/frontend/images/arrow.png')}}"
                                                                 alt=""></button>
 
-                                                    {{--<span onclick="registration()" class="btn btn-info topbtn-style"> Done &nbsp; <img--}}
-                                                    {{--class="imgiconnext" src="{{asset('assets/frontend/images/arrow.png')}}"--}}
-                                                    {{--alt=""></span>--}}
                                                 </div>
 
 
@@ -793,7 +781,7 @@
                 <td>
                     <input type="number" value="1" class="standeroption" step="any" name="weight[]">
                 </td>
-                <td class="total">100</td>
+                <td class="total ds" >100</td>
                 <td><span class="deleteitem" onclick="deleteitem(this)"><i class="fa-solid fa-trash"></i></span></td>
             </tr>
             </tbody>
@@ -820,7 +808,7 @@
                     <input type="number" value="1" class="standeroption" step="any"
                            name="weight[]">
                 </td>
-                <td class="total"></td>
+                <td class="total ds"></td>
                 <td><span class="deleteitem" onclick="deleteitem(this)"><i class="fa-solid fa-trash"></i></span></td>
             </tr>
 
@@ -843,7 +831,7 @@
                            name="qty[]">
                 </td>
                 <td></td>
-                <td class="total">100</td>
+                <td class="total ds">100</td>
                 <td><span class="deleteitem" onclick="deleteitem(this)"><i class="fa-solid fa-trash"></i></span></td>
             </tr>
 
@@ -867,7 +855,7 @@
                 </td>
                 <td>
                 </td>
-                <td class="total">100</td>
+                <td class="total ds">100</td>
                 <td><span class="deleteitem" onclick="deleteitem(this)"><i class="fa-solid fa-trash"></i></span></td>
             </tr>
 
@@ -877,7 +865,7 @@
             <tr>
                 <input type="hidden" class="item_id" value="5">
                 <input type="hidden" name="product_category[]" value="5">
-                <td><input class="item_name" type="text" class="w-75" name="other_name[]" placeholder="other"></td>
+                <td><input class="item_name other-style" type="text" class="w-75" name="other_name[]" placeholder="other"></td>
                 <td>
                     <input type="number" oninput="calculation()" value="1" class="custominput l" step="any"
                            name="l[]"> x
@@ -896,7 +884,7 @@
                     <input type="number" value="1" class="standeroption" step="any"
                            name="weight[]">
                 </td>
-                <td class="total">100</td>
+                <td class="total ds">100</td>
                 <td><span class="deleteitem" onclick="deleteitem(this)"><i class="fa-solid fa-trash"></i></span></td>
             </tr>
 

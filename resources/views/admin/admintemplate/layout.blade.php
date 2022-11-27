@@ -454,11 +454,11 @@
                                 class="paddingleft">Set Pickup</span></a>
                 </li>
 
-                <li id="cl" class="nav-item {{ request()->is('admin/drop/shipment')?'active':' ' }}">
-                    <a class="waves-effect" href="{{route('admin.drop.shipment')}}"><i
-                                style="color:#9f9f9c !important; " class="ti-pencil-alt"></i><span
-                                class="paddingleft">Set Drop off</span></a>
-                </li>
+                {{--<li id="cl" class="nav-item {{ request()->is('admin/drop/shipment')?'active':' ' }}">--}}
+                    {{--<a class="waves-effect" href="{{route('admin.drop.shipment')}}"><i--}}
+                                {{--style="color:#9f9f9c !important; " class="ti-pencil-alt"></i><span--}}
+                                {{--class="paddingleft">Set Drop off</span></a>--}}
+                {{--</li>--}}
 
                 <li id="cl" class="nav-item {{ request()->is('admin/shipment/payment')?'active':' ' }}">
                     <a class="waves-effect" href="{{route('admin.shipment.payment')}}"><i

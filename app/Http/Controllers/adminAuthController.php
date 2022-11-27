@@ -28,6 +28,8 @@ class adminAuthController extends Controller
            return redirect()->back();
        }
 
+       return redirect()->route('admin.login')->with('error','Email or password is invalid');
+
 //        return view('admin.index');
 
     }

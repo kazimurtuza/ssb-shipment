@@ -25,8 +25,8 @@ class CreateShipmentDetailsTable extends Migration
             $table->decimal('box_length',11,2)->nullable();
             $table->decimal('box_width',11,2)->nullable();
             $table->decimal('box_height',11,2)->nullable();
-            $table->decimal('uni_price',11,3)->nullable();
-            $table->decimal('total_price',11,3)->nullable();
+            $table->decimal('uni_price',11,2)->nullable();
+            $table->decimal('total_price',11,2)->nullable();
 
             $table->tinyInteger('status')->default(1)->comment('0=pending,1=picked_up,2=processing ,3=completed');
             $table->timestamp('created_at')->nullable()->default(null);

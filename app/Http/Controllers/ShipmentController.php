@@ -16,6 +16,7 @@ use App\Models\stripe_payment;
 use App\Models\User;
 use App\Models\UserSavedPaymentMethod;
 use Carbon\Carbon;
+use Faker\ORM\Spot\ColumnTypeGuesser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -25,15 +26,27 @@ class ShipmentController extends Controller
 {
     public function shipment()
     {
+        $today= date('Y-m-d',strtotime(Carbon::now())) ;
         $product_type = product_type::where('status', 1)->get();
-        $stander_product_category = stander_product_category::where('status', 1)->where('product_type', 'stander')->get();
-        $mattress = stander_product_category::where('status', 1)->where('product_type', 'mattress')->get();
-        $pickup_time_list = shipment_pickup_info::where('status', 0)->get();
+        $stander_product_category = stander_product_category::where('status', 1)
+            ->where('product_type', 'stander')->get();
+        $mattress = stander_product_category::where('status', 1)
+            ->where('product_type', 'mattress')->get();
+
+        $pickup_time_list = shipment_pickup_info::where('status', 0)
+            ->where('pickup_date','>=',$today)
+            ->get();
+        $pickup_time_count=$pickup_time_list->count();
+
         $drop_of = DropShipment::where('status', 0)->get();
 
+        $last_shipping_data =shipping_info::where('status',0)->orderBy('shipping_date','DESC')->get()->first()->shipping_date;
+        $last_shipping=  date('Y-m-d', strtotime('-1 day', strtotime($last_shipping_data)));
         $user_stripe_list = UserSavedPaymentMethod::where('user_id', Auth::id())->get();
 
-        return view('frontend.shipment_create')->with(compact('product_type', 'stander_product_category', 'mattress', 'pickup_time_list', 'drop_of', 'user_stripe_list'));
+        $total_card=$user_stripe_list->count();
+
+        return view('frontend.shipment_create')->with(compact('product_type', 'stander_product_category', 'mattress', 'pickup_time_list', 'drop_of', 'user_stripe_list','total_card','last_shipping','pickup_time_count'));
     }
 
     public function shipment_price_calculator()
@@ -46,13 +59,24 @@ class ShipmentController extends Controller
 
     public function charity_shipment()
     {
+        $today= date('Y-m-d',strtotime(Carbon::now())) ;
         $product_type = product_type::where('status', 1)->get();
         $stander_product_category = stander_product_category::where('status', 1)->where('product_type', 'stander')->get();
         $mattress = stander_product_category::where('status', 1)->where('product_type', 'mattress')->get();
-        $pickup_time_list = shipment_pickup_info::where('status', 0)->get();
+        $pickup_time_list = shipment_pickup_info::where('status', 0)->where('pickup_date','>=',$today)
+            ->get();
         $drop_of = DropShipment::where('status', 0)->get();
-//        return view('shipment.charity_shipment')->with(compact('product_type', 'stander_product_category', 'mattress','pickup_time_list'));
-        return view('frontend.shipment_donetion')->with(compact('product_type', 'stander_product_category', 'mattress', 'pickup_time_list', 'drop_of'));
+
+        $pickup_time_count=$pickup_time_list->count();
+
+        $last_shipping_data =shipping_info::where('status',0)->orderBy('shipping_date','DESC')->get()->first()->shipping_date;
+
+
+        $last_shipping=  date('Y-m-d', strtotime('-1 day', strtotime($last_shipping_data)));
+
+
+        //        return view('shipment.charity_shipment')->with(compact('product_type', 'stander_product_category', 'mattress','pickup_time_list'));
+        return view('frontend.shipment_donetion')->with(compact('product_type', 'stander_product_category', 'mattress', 'pickup_time_list', 'drop_of','last_shipping','pickup_time_count'));
     }
 
 
@@ -63,12 +87,31 @@ class ShipmentController extends Controller
     public function charityPay(Request $request)
     {
 
-        $pickup_info = shipment_pickup_info::with('shipping')->where('pickup_date', $request->pickup_time)->get()->first();
+        $shipping_id=0;
+
+        if(isset($request->is_drop_off) && ($request->is_drop_off == '1')) {
+            $date_list=shipping_info::where('status',0)->orderBy('shipping_date','ASC')->select('shipping_date','id')->get();
+            foreach ($date_list as $itemdata) {
+                if(strtotime($request->drop_off_date)<= strtotime($itemdata->shipping_date)){
+                    $shipping_id=$itemdata->id;
+                }
+            }
+
+        } else {
+            $pickup_info = shipment_pickup_info::with('shipping')->where('pickup_date', $request->pickup_time)->get()->first();
+
+            $shipping_id=$pickup_info->shipping->id;
+        }
+        if($shipping_id==0){
+            return redirect()->back()->with('error','NO shipping container available For this drop off');
+        }
+
+
 
         $shipment = new shipment();
         $shipment->user_id = Auth::user()->id;
         $shipment->stripe_payment_id = 0;
-        $shipment->shipping_id = $pickup_info->shipping->id;
+        $shipment->shipping_id = $shipping_id;
         $shipment->shipment_no = 1000;
         $shipment->from_address = $request->sender_address;
         $shipment->total_item = sizeof($request->product_category);
@@ -77,7 +120,7 @@ class ShipmentController extends Controller
         $shipment->sender_name = $request->sender_name;
         $shipment->sender_mail = $request->sender_email;
 
-        $shipment->to_address = $request->sender_address;
+        $shipment->to_address = $request->receiver_address;
         $shipment->receiver_name = $request->receiver_name;
         $shipment->receiver_phone = $request->receiver_phone;
         $shipment->receiver_email = $request->receiver_email;
@@ -88,6 +131,8 @@ class ShipmentController extends Controller
         if ($request->is_drop_off) {
             $shipment->drop_off_id = $request->drop_off_id;
             $shipment->is_drop_off = $request->is_drop_off;
+            $shipment->drop_off_address = $request->drop_off_id==1?'Renton, WA -  Saturdays':'Lynnwood, WA -  Sundays';
+            $shipment->pickup_time = $request->drop_off_date;
         } else {
             $shipment->pickup_time = $request->pickup_time;
         }
@@ -119,7 +164,7 @@ class ShipmentController extends Controller
                     $l = $product_info->length;
                     $w = $request->weidth;
                     $h = $request->height;
-                    $weight_pound = poundCalculation($l, $w, $h);
+                    $weight_pound = $this->poundCalculation($l, $w, $h);
                     $unit_price = $product_info->price;
                 } else {
                     //Custom size and other
@@ -192,6 +237,9 @@ class ShipmentController extends Controller
             $shipment_details->save();
             $shipment_total_price += $unit_price * $request->qty[$key];
         }
+        if(isset($request->is_drop_off) && ($request->is_drop_off == '0')) {
+            $shipment_total_price= $shipment_total_price+20;
+        }
 
         $shipment->shipment_no = 1000 + $shipment->id;
         $shipment->total_bill = $shipment_total_price;
@@ -203,7 +251,7 @@ class ShipmentController extends Controller
 
 
 //        return redirect()->back()->with('success', 'Thank you for your Donation ');
-        return redirect()->back()->with('payment_success', [$shipment_total_price, 'Thank you for your Donation']);
+        return redirect()->back()->with('donation_success', [$shipment_total_price, 'Thank you for your Donation']);
 
     }
 
@@ -282,15 +330,40 @@ class ShipmentController extends Controller
 
     public function shipmentPayment(Request $request)
     {
-        return $request;
+
+//        return $request->is_drop_off;
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        $pickup_info = shipment_pickup_info::with('shipping')->where('pickup_date', $request->pickup_time)->get()->first();
+
+        $shipping_id=0;
+
+        if(isset($request->is_drop_off) && ($request->is_drop_off == '1')) {
+            $date_list=shipping_info::where('status',0)->orderBy('shipping_date','ASC')->select('shipping_date','id')->get();
+            foreach ($date_list as $itemdata) {
+                if(strtotime($request->drop_off_date)<= strtotime($itemdata->shipping_date)){
+                    $shipping_id=$itemdata->id;
+                }
+            }
+
+        } else {
+            $pickup_info = shipment_pickup_info::with('shipping')->where('pickup_date', $request->pickup_time)->get()->first();
+
+            $shipping_id=$pickup_info->shipping->id;
+        }
+
+        if($shipping_id==0){
+            return redirect()->back()->with('error','NO shipping container available For this drop off');
+        }
+
+
+
+
+//        $pickup_info = shipment_pickup_info::with('shipping')->where('pickup_date', $request->pickup_time)->get()->first();
 
         $shipment = new shipment();
         $shipment->user_id = Auth::user()->id;
         $shipment->stripe_payment_id = 0;
-        $shipment->shipping_id = $pickup_info->shipping->id;
+        $shipment->shipping_id = $shipping_id;
         $shipment->shipment_no = 1000;
         $shipment->from_address = $request->address;
         $shipment->total_item = sizeof($request->product_category);
@@ -298,10 +371,13 @@ class ShipmentController extends Controller
         $shipment->phone = $request->phone;
         $shipment->sender_name = $request->name;
         $shipment->sender_mail = $request->email;
+        $shipment->for_charity = 0;
 
         if ($request->is_drop_off) {
             $shipment->drop_off_id = $request->drop_off_id;
             $shipment->is_drop_off = $request->is_drop_off;
+            $shipment->pickup_time = $request->drop_off_date;
+            $shipment->drop_off_address = $request->drop_off_id==1?'Renton, WA -  Saturdays':'Lynnwood, WA -  Sundays';
         } else {
             $shipment->pickup_time = $request->pickup_time;
         }
@@ -420,10 +496,15 @@ class ShipmentController extends Controller
         //shipment
         $shipment_total_price = floatval(number_format($shipment_total_price, 2, '.', ''));
 
+        if(isset($request->is_drop_off) && ($request->is_drop_off == '0')) {
+            $shipment_total_price= $shipment_total_price+20;
+        }
+
 //     stripe customer
 
 
-        if ($request->new_card == 1) {
+        if ($request->new_card == 1 || (UserSavedPaymentMethod::count()==0) ) {
+
 
             if ($request->card_save) {
                 $stripe_user = Stripe\Customer::create([
@@ -450,12 +531,13 @@ class ShipmentController extends Controller
                 $userdata->exp_year = $stripe_info->payment_method_details->card->exp_year;
                 $userdata->save();
             } else {
+
+                Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
                 $stripe_info = Stripe\Charge::create([
                     "amount" => 100 * $shipment_total_price,
                     "currency" => "usd",
                     "source" => $request->stripeToken,
-                    "customer" => $stripe_user->id,
-                    "description" => "ssb shipment payment",
+                    "description" => "shipment payment",
                 ]);
 
             }
@@ -505,7 +587,7 @@ class ShipmentController extends Controller
 
         }
 
-        $shipment_list = shipment::whereBetween('pickup_time', [$start, $end])->get();
+        $shipment_list = shipment::whereBetween('pickup_time', [$start, $end])->orderBy('shipment_no','DESC')->get();
 
         return view('shipment.all_shipment')->with(compact('shipment_list'));
 

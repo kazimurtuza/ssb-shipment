@@ -32,6 +32,7 @@ class CreateShipmentsTable extends Migration
 
             $table->bigInteger('drop_off_id')->nullable();
             $table->tinyInteger('is_drop_off')->default(0);
+            $table->string('drop_off_address')->nullable();
 
             $table->string('phone')->nullable();
             $table->string('pickup_time')->nullable();

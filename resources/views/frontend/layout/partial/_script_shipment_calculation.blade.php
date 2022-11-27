@@ -183,17 +183,17 @@
         $('.footer').append(`
              <tr>
                                                 <td></td>
-                                                <td class="text-right"> Order Total</td>
+                                                <td class="text-right">Total</td>
                                                 <td>$ ${all_total}</td>
                                             </tr>
                                             <tr>
                                                 <td></td>
-                                                <td class="text-right"> Pickup Fee</td>
+                                                <td class="text-right">Fee</td>
                                                 <td>$0</td>
                                             </tr>
                                             <tr>
                                                 <td></td>
-                                                <td class="text-right"><strong>total</strong></td>
+                                                <td class="text-right"><strong>Total</strong></td>
                                                 <td>$${all_total}</td>
                                             </tr>
             `)

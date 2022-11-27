@@ -1,24 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from html.themexriver.com/Saasio/index-31.1.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 12 Jun 2022 11:00:27 GMT -->
-{{--<head>--}}
-{{--<meta charset="UTF-8">--}}
-{{--<title>SaaSio - Personal Portfolio</title>--}}
-{{--<link rel="shortcut icon" href="{{asset('frontend/assets')}}/img/fv.png" type="image/x-icon">--}}
-{{--<!-- Mobile Specific Meta -->--}}
-{{--<meta name="viewport" content="width=device-width, initial-scale=1">--}}
-{{--<!--Css Fils -->--}}
-{{--<link rel="stylesheet" href="{{asset('frontend/assets')}}/css/animate.css">--}}
-{{--<link rel="stylesheet" href="{{asset('frontend/assets')}}/css/flaticon-31.css">--}}
-{{--<link rel="stylesheet" href="{{asset('frontend/assets')}}/css/fontawesome-all.css">--}}
-{{--<link rel="stylesheet" href="{{asset('frontend/assets')}}/css/owl.carousel.css">--}}
-{{--<link rel="stylesheet" href="{{asset('frontend/assets')}}/css/typer.css">--}}
-{{--<link rel="stylesheet" href="{{asset('frontend/assets')}}/css/slick-theme.css">--}}
-{{--<link rel="stylesheet" href="{{asset('frontend/assets')}}/css/slick.css">--}}
-{{--<link rel="stylesheet" href="{{asset('frontend/assets')}}/css/bootstrap.min.css">--}}
-{{--<link rel="stylesheet" href="{{asset('frontend/assets')}}/css/style-31.css">--}}
-{{--</head>--}}
 
 @include('frontend.layout.partial._head')
 
@@ -230,13 +212,23 @@
                         </div>
                     </div>
                     <div class="col-sm-12  text-center">
-                        <h5>Thank Your Four Your Payment</h5>
-                        <span class="d-block subt">Total Payment Amount</span>
+
                         @if(session()->has('payment_success'))
+                            <h5>Thank you for your payment</h5>
+                            <span class="d-block subt">Total Payment Amount</span>
                         <span class="d-block total">${{ session()->get('payment_success')[0] }}</span>
 
                         <span class="d-block subt2">Payment Method</span>
                         <span class="d-block total payment">{{ session()->get('payment_success')[1] }}</span>
+                        @endif
+
+                        @if(session()->has('donation_success'))
+                                <h5>Thank you for your Donation</h5>
+                                <span class="d-block subt">Total Payment Amount</span>
+                        <span class="d-block total text-success"> Free</span>
+
+                        {{--<span class="d-block subt2">Payment Method</span>--}}
+                        {{--<span class="d-block total payment">{{ session()->get('donation_success')[1] }}</span>--}}
                         @endif
 
 

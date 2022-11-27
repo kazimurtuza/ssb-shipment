@@ -16,6 +16,18 @@
             color: #555;
         }
 
+        .headinfo{
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+
+        }
+
         .invoice-box table {
             width: 100%;
             line-height: inherit;
@@ -104,7 +116,23 @@
 <body>
 <?php
 $total_price=0;
+$fee=0;
+if($shipment_info->is_drop_off==0){
+    $fee=20;
+}
+
 ?>
+<p class="headinfo">
+    Dear {{$shipment_info->sender_name}},
+    <br>
+    {{$shipment_info->for_charity==1?'Your donation is completed':'Your payment for the shipment is completed'}}
+    .Which  is being sent from {{$shipment_info->from_address}} to {{$shipment_info->to_address}},   your invoice id #{{$shipment_info->shipment_no}}.
+    <br>
+    Your can print your box info sticker: <a href="{{route('shipment.product.print',['shipment_id'=>$shipment_info->id])}}">Print box sticker</a>.
+    <br>
+    Your shipment information is shown below:
+</p>
+<br>
 <div class="invoice-box">
     <table cellpadding="0" cellspacing="0">
         <tr class="top">
@@ -112,7 +140,7 @@ $total_price=0;
                 <table>
                     <tr>
                         <td class="title">
-                            <img src="{{asset('assets/images/ssb1.png')}}" style="width:100%; max-width:70px;">
+                            <img src="{{asset('assets/images/ssb1.png')}}" style="width:100%; max-width:200px;">
                         </td>
 
                         <td>
@@ -134,7 +162,9 @@ $total_price=0;
                         </td>
 
                         <td>
-                            {{auth()->user()->name}}
+                            {{$shipment_info->sender_name}}
+                            <br>
+                            <p>{{$shipment_info->from_address}}</p>
                             <br>
                             {{$shipment_info->phone}}
                         </td>
@@ -167,17 +197,17 @@ $total_price=0;
         {{--</tr>--}}
 
         <tr class="heading">
-            <td>
+            <td style="text-align: center">
               Item
             </td>
 
-            <td>
+            <td style="text-align: center">
               Quantity
             </td>
             {{--<td>--}}
               {{--Unit Price--}}
             {{--</td>--}}
-            <td>
+            <td style="text-align: center">
               Price
             </td>
         </tr>
@@ -186,23 +216,29 @@ $total_price=0;
                 <td>
                     {{$details->name}}
                     <br>
-                    @if($details->category_id==4)
-                        {{$details->size}} inches
-                    @elseif($details->category_id==6)
-                        {{$details->size}}
-                    @else
-                        {{$details->box_length}} x {{$details->box_width}} x {{$details->box_height}}
+
+                    @if(($details->category_id==1)&&($details->sub_category_id<=4))
+                        <span>{{$details->standerProduct->length}} x {{$details->standerProduct->weidth}} x {{$details->standerProduct->height}} </span>
+
+                    @elseif(($details->sub_category_id>4))
+                        <span>{{$details->size}} </span>
+                    @elseif(($details->category_id==4))
+                        <span>{{$details->size}}  inc </span>
+
+                    @elseif(($details->category_id==3 ||$details->category_id==2 ||$details->category_id==5))
+                        <span>{{(int)$details->box_length}} x {{(int)$details->box_width}} x {{(int)$details->box_height}} </span>
+
                     @endif
 
                 </td>
 
-                <td>
+                <td style="text-align: center">
                     {{$details->quantity}}
                 </td>
                 {{--<td>--}}
                     {{--{{$details->uni_price}}--}}
                 {{--</td>--}}
-                <td>
+                <td style="text-align: right">
                     {{$details->total_price}}
                 </td>
                 <?php
@@ -214,11 +250,48 @@ $total_price=0;
         <tr class="item footer"  >
             <td>
             </td>
+            <td style="text-align: right">
+                Subtotal
+            </td>
+            <td style="text-align: right">
+                @if($shipment_info->for_charity==1)
+                    <span>00</span>
+                    @else
+                    ${{$total_price}}
+                    @endif
+
+
+            </td>
+        </tr>
+        <tr class="item footer"  >
             <td>
+            </td>
+            <td style="text-align: right">
+              Pickup Fee
+            </td>
+            <td style="text-align: right">
+                @if($shipment_info->for_charity==1)
+                    <span>00</span>
+                @else
+                    ${{$fee}}
+                @endif
+
+            </td>
+        </tr>
+
+        <tr class="item footer"  >
+            <td>
+            </td>
+            <td style="text-align: right">
                 Total
             </td>
-            <td>
-                ${{$total_price}}
+            <td style="text-align: right">
+                @if($shipment_info->for_charity==1)
+                   <span>00</span>
+                @else
+                    ${{$total_price+$fee}}
+                @endif
+
             </td>
         </tr>
 

@@ -1,12 +1,37 @@
 @extends('frontend.layout.layout')
 @section('style_link')
-    <link href=" {{asset('assets/')}}/css/step-card.css" rel="stylesheet">
+    <link href=" {{asset('frontend/assets')}}/css/step-card.css" rel="stylesheet">
+
+    <link href=" {{asset('frontend/assets')}}/css/preloader.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
+    <style>
+        .datepicker .next.disabled, .datepicker .prev.disabled {
+            visibility: visible;
+        }
+    </style>
+
 @endsection
 
 @section('main_content')
 
+    {{--preloader--}}
+    <div class="preloader-area" style="display: none">
+        <div class="spinner">
+            <div class="inner">
+                <div class="disc"></div>
+                <div class="disc"></div>
+                <div class="disc"></div>
+            </div>
+
+        </div>
+        <div class="loader-text">Please Wait ...</div>
+    </div>
+    {{--preloader--}}
+
 
     <div class="row d-flex justify-content-center parent-div" style="background: #e5eef7;background-image: url('{{ asset('frontend/assets')}}/img/port-img-31/cta-bg.png');">
+
             <div class="col-xl-12 text-center">
                 <div class="apihu-port-section-heading">
                     <h2 class="apihu-port-section-title  port-tx">Place your <span class="apihu-port-section-title-color">Shipment</span></h2>
@@ -17,6 +42,7 @@
 
 
         <div class="col-sm-9  apihu-port-single-service ">
+
 
             <div class="row p-0 mairow  card-row-st" style="padding: 40px 20px;
   background: linear-gradient(103deg, #e3edf7, #ffffff);
@@ -41,12 +67,11 @@
                                 <div class="text-center frtop" style="margin-top: 32px"><span>Step 1-</span> &nbsp;
                                     <span class="sing2">Shipping Info</span> &nbsp;&nbsp;
                                 </div>
-
-
                                 <input type="hidden" class="from_lat" name="from_lat">
                                 <input type="hidden" class="from_lng" name="from_lng">
                                 <input type="hidden" class="distance" name="distance">
                                 <input type="hidden" class="from_place_id" name="from_place_id">
+                                <input type="hidden" class="fee" name="fee">
 
                                 <div class="row mt-3">
                                     <div class="col-sm-6">
@@ -175,7 +200,7 @@
                                                 <th>Size</th>
                                                 <th class="headqty">Quantity</th>
                                                 <th>Weight</th>
-                                                <th>Price</th>
+                                                {{--<th>Price</th>--}}
                                                 <th>Action</th>
                                                 </thead>
                                                 <tbody id="item">
@@ -206,19 +231,20 @@
                                 <div class="text-center frtop" style="margin-top: 32px">
                                 </div>
                                 <div class="text-center frtop" style="margin-top: 32px"><span>Step 3-</span> &nbsp;
-                                    <span class="sing2">Set Pickup Time</span></div>
+                                    <span class="sing2">Set Pickup  or Drop-off Time Schedule</span></div>
                                 <div class="row mt-4 justify-content-center">
                                     <div class="col-sm-8 picktype">
-                                        <div class="picktype-item">
-                                            <p class="itemp">Schedule a pick up</p>
-                                            <input class="form-check-input" type="radio" onclick="pickType('id1','id2')" name="is_drop_off"
+                                        <label for="exampleInputEmail1"  class="picktype-item">
+                                            <label for="exampleInputEmail1"  class="itemp">Schedule a pick up</label>
+                                            <input class="form-check-input ship-type" id="exampleInputEmail1" type="radio" onclick="pickType('id1','id2')" name="is_drop_off"
                                                    value="0" checked>
 
-                                        </div>
-                                        <div class="picktype-item">
-                                            <p class="itemp">Drop shipment off</p> <input class="form-check-input" type="radio" onclick="pickType('id2','id1')" name="is_drop_off"
+                                        </label>
+                                        <label for="ropoff" class="picktype-item">
+                                            <p class="itemp">Drop shipment off</p>
+                                            <input class="form-check-input ship-type" id="ropoff" type="radio" onclick="pickType('id2','id1')" name="is_drop_off"
                                                    value="1">
-                                        </div>
+                                        </label>
 
                                     </div>
                                 </div>
@@ -227,35 +253,72 @@
                                         <strong>Pickup Schedule</strong>
                                         <br> <br>
                                         @foreach($pickup_time_list as $key=>$pick_up_date)
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="pickup_time"
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" id="idt{{$pick_up_date->id}}" type="radio" name="pickup_time"
                                                        value="{{$pick_up_date->pickup_date}}" {{$key==0?'checked':''}}>
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    {{date('d M Y',strtotime($pick_up_date->pickup_date))}} {{$key}} , between 9
-                                                    AM to 5 PM
+                                                <label  class="form-check-label itemls" for="idt{{$pick_up_date->id}}" >
+                                                    <span class="part1-bs">{{date('d M Y',strtotime($pick_up_date->pickup_date))}},</span>
+                                                    <span class="part2-bs">Between 9 AM to 5 PM</span>
                                                 </label>
                                             </div>
                                         @endforeach
                                     </div>
 
-                                    <div class="col-sm-8" id="id2" style="display: none">
-                                        <strong>Drop shipment off</strong>
-                                        <br> <br>
+                                    {{--<div class="col-sm-8" id="id2" style="display: none">--}}
+                                        {{--<strong>Drop shipment off</strong>--}}
+                                        {{--<br> <br>--}}
 
-                                        @foreach($drop_of as $key=>$drop_of_info)
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="drop_off_id"
-                                                       value="{{$drop_of_info->id}}" {{$key==0?'checked':''}}>
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    {{$drop_of_info->shipment_drop_location}}
-                                                    {{date('d M Y',strtotime($drop_of_info->shipment_drop_date))}} , between {{ date('g:i a',strtotime($drop_of_info->start_time))}}
-                                                     to {{date('g:i a',strtotime($drop_of_info->end_time))}}
-                                                </label>
-                                            </div>
-                                        @endforeach
+                                        {{--@foreach($drop_of as $key=>$drop_of_info)--}}
+                                            {{--<div class="form-check">--}}
+                                                {{--<input class="form-check-input" type="radio" name="drop_off_id"--}}
+                                                       {{--value="{{$drop_of_info->id}}" {{$key==0?'checked':''}}>--}}
+                                                {{--<label class="form-check-label" for="flexRadioDefault1">--}}
+                                                    {{--{{$drop_of_info->shipment_drop_location}}--}}
+                                                    {{--{{date('d M Y',strtotime($drop_of_info->shipment_drop_date))}} , between {{ date('g:i a',strtotime($drop_of_info->start_time))}}--}}
+                                                     {{--to {{date('g:i a',strtotime($drop_of_info->end_time))}}--}}
+                                                {{--</label>--}}
+                                            {{--</div>--}}
+                                        {{--@endforeach--}}
+                                    {{--</div>--}}
+
+                                    <div class="col-sm-11" id="id2" style="display: none">
+                                        <strong>Drop shipment off</strong>
+                                        <input type="hidden" name="drop_off_date" id="drop_off_date">
+                                        <br> <br>
+                                        <div  style="display: flex;">
+                                            <input style="flex-basis: 2%" class="form-check-input senddate2" id="flexRadioDefault12" type="radio" name="drop_off_id"
+                                                   value="1" checked>
+                                            <label style="flex-basis: 76%" class="form-check-label itemls" for="flexRadioDefault12">
+                                                Renton, WA -  Saturdays Between 10 AM to 2 PM
+                                            </label>
+                                            <input style="flex-basis: 22%" value=" " data-date-format="dd/mm/yyyy" id="flexRadioDefault1" class="datepicker pickerdata dataestyle" placeholder="Select Date">
+                                        </div>
+                                        <div  style="display: flex;" class="mt-3">
+                                            <input style="flex-basis: 2%" class="form-check-input senddate2" id="flexRadioDefault13" type="radio" name="drop_off_id"
+                                                   value="2">
+                                            {{--{{$key==0?'checked':''}}--}}
+                                            <label style="flex-basis: 76%" class="form-check-label itemls" for="flexRadioDefault13">
+                                                Lynnwood, WA -  Sundays  Between 11 AM to 1 PM
+                                            </label>
+                                            <input style="flex-basis: 22%" value=" "  data-date-format="dd/mm/yyyy" class="datepicker2 pickerdata dataestyle" placeholder="Select Date">
+                                        </div>
+
+
+                                        {{--@foreach($drop_of as $key=>$drop_of_info)--}}
+                                        {{--<div class="form-check">--}}
+                                        {{--kk0--}}
+                                        {{--<input class="form-check-input" type="radio" name="drop_off_id"--}}
+                                        {{--value="{{$drop_of_info->id}}" {{$key==0?'checked':''}}>--}}
+                                        {{--<label class="form-check-label" for="flexRadioDefault1">--}}
+                                        {{--{{$drop_of_info->shipment_drop_location}}--}}
+                                        {{--between {{ date('g:i a',strtotime($drop_of_info->start_time))}}--}}
+                                        {{--to {{date('g:i a',strtotime($drop_of_info->end_time))}}--}}
+                                        {{--<input data-date-format="dd/mm/yyyy" class="datepicker">--}}
+                                        {{--</label>--}}
+                                        {{--</div>--}}
+                                        {{--@endforeach--}}
                                     </div>
                                 </div>
-
                                 <br>
                                 <div class="col-sm-12 text-center submitbtn mt-5">
                                     <span class="btn  topbtn-style2" onclick="stepShow('step2')"><img
@@ -314,11 +377,11 @@
                                 </div>
                                 <div class="row mt-4 justify-content-center">
                                     <input type="hidden" name="stripe_user_id" id="stripe_user_id" value="">
-                                    @if($user_stripe_list)
+                                    @if($total_card >0)
                                     @foreach($user_stripe_list as $carlist)
-                                    <div class="col-sm-7 precard" onclick="checkBoxchecked('{{$carlist->stripe_user_id}}',this)">
+                                    <div class="col-sm-5 precard" onclick="checkBoxchecked('{{$carlist->stripe_user_id}}',this)">
                                         <div class="row">
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-4">
                                                 <img style="width:100%" src="{{asset('assets/images/master.png')}}" alt="">
                                             </div>
                                                 <div class="col-sm-8">
@@ -333,7 +396,7 @@
                                     </div>
                                         @endforeach
 
-                                        <div class="col-sm-7">
+                                        <div class="col-sm-7 mt-3 mb-3">
                                             <div>
                                                 <input type="checkbox" name="new_card" id="new_card" onclick="newCardAdd()" value="1"/> <label style="  font-size: 15px;margin-left: 5px; margin-right: 10px;">Make payment with another card</label>
 
@@ -341,7 +404,7 @@
                                         </div>
                                     @endif
 
-                                    <div class="col-sm-8 custom-card" style="display:{{$user_stripe_list?'none':''}} "  >
+                                    <div class="col-sm-8 custom-card" style="display:{{$total_card >0?'none':''}} "  >
                                         <div class='form-row row'>
                                             <div class='col-xs-12 form-group required w-100 text-left'>
                                                 <label class='control-label'>Name on Card</label> <input
@@ -451,7 +514,7 @@
                 <td>
                     <input type="number" value="1" class="standeroption" step="any" name="weight[]">
                 </td>
-                <td class="total">100</td>
+                <td class="total totalhide">100</td>
                 <td><span class="deleteitem" onclick="deleteitem(this)"><i class="fa-solid fa-trash"></i></span></td>
             </tr>
             </tbody>
@@ -478,7 +541,7 @@
                     <input type="number" value="1" class="standeroption" step="any"
                            name="weight[]">
                 </td>
-                <td class="total"></td>
+                <td class="total totalhide"></td>
                 <td><span class="deleteitem" onclick="deleteitem(this)"><i class="fa-solid fa-trash"></i></span></td>
             </tr>
 
@@ -501,7 +564,7 @@
                            name="qty[]">
                 </td>
                 <td></td>
-                <td class="total">100</td>
+                <td class="total totalhide">100</td>
                 <td><span class="deleteitem" onclick="deleteitem(this)"><i class="fa-solid fa-trash"></i></span></td>
             </tr>
 
@@ -525,7 +588,7 @@
                 </td>
                 <td>
                 </td>
-                <td class="total">100</td>
+                <td class="total totalhide">100</td>
                 <td><span class="deleteitem" onclick="deleteitem(this)"><i class="fa-solid fa-trash"></i></span></td>
             </tr>
 
@@ -535,7 +598,7 @@
             <tr>
                 <input type="hidden" class="item_id" value="5">
                 <input type="hidden" name="product_category[]" value="5">
-                <td><input class="item_name" type="text" class="w-75" name="other_name[]" placeholder="other"></td>
+                <td><input class="item_name other-style" type="text" class="w-75" name="other_name[]" placeholder="other"></td>
                 <td>
                     <input type="number" oninput="calculation()" value="1" class="custominput l" step="any"
                            name="l[]"> x
@@ -554,7 +617,7 @@
                     <input type="number" value="1" class="standeroption" step="any"
                            name="weight[]">
                 </td>
-                <td class="total">100</td>
+                <td class="total totalhide">100</td>>
                 <td><span class="deleteitem" onclick="deleteitem(this)"><i class="fa-solid fa-trash"></i></span></td>
             </tr>
 
@@ -569,6 +632,8 @@
 @endsection
 
 @section('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+
     <script>
         @if(!auth()->check())
         $('#crossbtn').hide();
@@ -583,9 +648,8 @@
         {{--payment success--}}
 
 
-
-
         function stepShow(stem) {
+            //kk
             $('.error_span').hide();
             if (stem === 'step4') {
                 invoice()
@@ -601,6 +665,32 @@
             } else {
                 $('#left2').hide();
                 $('#left1').show();
+            }
+            if (stem === 'step4'){
+                if($('.ship-type:checked').val()==1){
+                    $('.fee').val(0);
+                    $('.tottal_fee').html('$0');
+
+                    $dataval=$('.senddate2:checked').parent().find('.pickerdata').val();
+                    if(!$dataval){
+                        alert('Please  date input form fill up')
+                        return 1;
+                    }else{
+                        $('#drop_off_date').val($dataval);
+
+                    }
+                }else{
+
+                    @if($pickup_time_count==0)
+                    alert('No pickup date is available, please select other')
+                    return false;
+                    @endif
+
+                    $('.fee').val(20)
+                    $('.tottal_fee').html('$20');
+                }
+
+                invoice()
             }
 
             if (stem === 'step2') {
@@ -740,6 +830,7 @@
         }
 
         function invoice() {
+            let fee=+$('.fee').val();
             let all_total = 0;
             $('#invoice').empty();
             $('#item tr').each(function () {
@@ -792,6 +883,7 @@
                 `)
                 }
             )
+            let final_total=all_total+fee
 
             $('.footer').empty()
             $('.footer').append(`
@@ -803,12 +895,12 @@
                                             <tr>
                                                 <td></td>
                                                 <td class="text-right"> Pickup Fee</td>
-                                                <td>$0</td>
+                                                <td class="tottal_fee">$${fee}</td>
                                             </tr>
                                             <tr>
                                                 <td></td>
                                                 <td class="text-right"><strong>Total</strong></td>
-                                                <td>$${all_total}</td>
+                                                <td>$${final_total}</td>
                                             </tr>
             `)
         }
@@ -827,7 +919,6 @@
             if ((pound > 500)) {
                 price = parseFloat(pound * 0.81).toFixed(2);
             }
-
             return price;
         }
 
@@ -864,45 +955,62 @@
         $(function () {
             var $form = $(".require-validation");
             $('form.require-validation').bind('submit', function (e) {
-                var $form = $(".require-validation"),
-                    inputSelector = ['input[type=email]', 'input[type=password]',
-                        'input[type=text]', 'input[type=file]',
-                        'textarea'
-                    ].join(', '),
-                    $inputs = $form.find('.required').find(inputSelector),
-                    $errorMessage = $form.find('div.error'),
-                    valid = true;
-                $errorMessage.addClass('hide');
-                $('.has-error').removeClass('has-error');
-                $inputs.each(function (i, el) {
-                    var $input = $(el);
-                    if ($input.val() === '') {
-                        $input.parent().addClass('has-error');
-                        $errorMessage.removeClass('hide');
+
+                let new_card=$('#new_card').is(':checked');
+                @if($total_card ==0)
+                  new_card=1;
+                @endif
+                if(new_card){
+                    var $form = $(".require-validation"),
+                        inputSelector = ['input[type=email]', 'input[type=password]',
+                            'input[type=text]', 'input[type=file]',
+                            'textarea'
+                        ].join(', '),
+                        $inputs = $form.find('.required').find(inputSelector),
+                        $errorMessage = $form.find('div.error'),
+                        valid = true;
+                    $errorMessage.addClass('hide');
+                    $('.has-error').removeClass('has-error');
+                    $inputs.each(function (i, el) {
+                        var $input = $(el);
+                        if ($input.val() === '') {
+                            $input.parent().addClass('has-error');
+                            $errorMessage.removeClass('hide');
+                            e.preventDefault();
+                        }
+                    });
+                    if (!$form.data('cc-on-file')) {
                         e.preventDefault();
+                        Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+                        Stripe.createToken({
+                            number: $('.card-number').val(),
+                            cvc: $('.card-cvc').val(),
+                            exp_month: $('.card-expiry-month').val(),
+                            exp_year: $('.card-expiry-year').val()
+                        }, stripeResponseHandler);
                     }
-                });
-                if (!$form.data('cc-on-file')) {
+                }else{
                     e.preventDefault();
-                    Stripe.setPublishableKey($form.data('stripe-publishable-key'));
-                    Stripe.createToken({
-                        number: $('.card-number').val(),
-                        cvc: $('.card-cvc').val(),
-                        exp_month: $('.card-expiry-month').val(),
-                        exp_year: $('.card-expiry-year').val()
-                    }, stripeResponseHandler);
+                   $user_stripe_id= $('#stripe_user_id').val();
+                   if($user_stripe_id){
+                       preloaderOn()
+                       e.currentTarget.submit();
+                   }else{
+                       alert('Please Select a card');
+                   }
                 }
+
             });
 
             function stripeResponseHandler(status, response) {
                 if (response.error) {
-                    $form.get(0).submit();
                     alert('Please fill out the form correctly')
                     $('.error')
                         .removeClass('hide')
                         .find('.alert')
                         .text(response.error.message);
                 } else {
+                    preloaderOn()
                     /* token contains id, last4, and card type */
                     var token = response['id'];
                     $form.find('input[type=text]').empty();
@@ -911,6 +1019,7 @@
                 }
             }
         });
+
     </script>
     {{--stripe--}}
 
@@ -956,7 +1065,6 @@
                 $('#start_to').children('.to_lat').val(place1.geometry['location'].lat());
                 $('#start_to').children('.to_lng').val(place1.geometry['location'].lng());
                 $('#start_to').children('.to_place_id').val(place1.place_id);
-
                 setdistance();
             });
 
@@ -976,7 +1084,6 @@
         function setdistance(end_lat,end_lan) {
             $from_lat= 23.72601300;
             $from_lan=90.39758070;
-
 
             // let from_latlng = new google.maps.LatLng(from_point[0], from_point[1]);
             let from_latlng = new google.maps.LatLng($from_lat, $from_lan);
@@ -1007,6 +1114,39 @@
             $('#stripe_user_id').val('')
             $('.precard').css("border", "none")
             $( ".custom-card" ).toggle()
+        }
+
+
+        //    date picker
+        $('.datepicker').datepicker({
+            startDate: new Date(),
+            // minDate: 0,
+            format: "yyyy-mm-dd",
+            endDate: '{{$last_shipping}}',
+            daysOfWeekHighlighted: [6],
+            daysOfWeekDisabled: [0,1,2,3,4,5],
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('.datepicker').datepicker("setDate", '');
+
+        $('.datepicker2').datepicker({
+            startDate: new Date(),
+            // minDate: 0,
+            format: "yyyy-mm-dd",
+            endDate:'{{$last_shipping}}',
+            daysOfWeekHighlighted: [0],
+            daysOfWeekDisabled: [1,2,3,4,5,6],
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('.datepicker2').datepicker("setDate", '');
+        // end   date picker
+
+        function preloaderOn(){
+            $('.preloader-area').show();
         }
     </script>
     {{--google autocomplite--}}
