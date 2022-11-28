@@ -673,7 +673,7 @@
 
                     $dataval=$('.senddate2:checked').parent().find('.pickerdata').val();
                     if(!$dataval){
-                        alert('Please  date input form fill up')
+                        alert('Please fill up date input form ')
                         return 1;
                     }else{
                         $('#drop_off_date').val($dataval);

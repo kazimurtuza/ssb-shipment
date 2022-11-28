@@ -125,12 +125,16 @@ if($shipment_info->is_drop_off==0){
 <p class="headinfo">
     Dear {{$shipment_info->sender_name}},
     <br>
-    {{$shipment_info->for_charity==1?'Your donation is completed':'Your payment for the shipment is completed'}}
-    .Which  is being sent from {{$shipment_info->from_address}} to {{$shipment_info->to_address}},   your invoice id #{{$shipment_info->shipment_no}}.
     <br>
-    Your can print your box info sticker: <a href="{{route('shipment.product.print',['shipment_id'=>$shipment_info->id])}}">Print box sticker</a>.
+    {{$shipment_info->for_charity==1?'Your donation has been placed':'Your order has been placed. We have received your payment'}}
+    .Your parcel will be received from <strong>{{$shipment_info->from_address}}</strong> to <strong>{{$shipment_info->to_address}}</strong>.
+    <br><br>
+    You can track your shipment in the website through your invoice ID #{{$shipment_info->shipment_no}}.
     <br>
-    Your shipment information is shown below:
+    <br>
+    Your can print your delivery sticker here: <a href="{{route('shipment.product.print',['shipment_id'=>$shipment_info->id])}}">Print sticker</a>.
+    <br><br>
+    The Invoice has been attached below:
 </p>
 <br>
 <div class="invoice-box">

@@ -34,6 +34,6 @@ class customerMail extends Mailable
      */
     public function build()
     {
-        return $this->view('invoice_mail');
+        return $this->subject("Seattle sea bridge invoice")->view('invoice_mail');
     }
 }
